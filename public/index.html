@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Three.js Flood Annotation</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Crunchbase_favicon.svg/1024px-Crunchbase_favicon.svg.png"
+        />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+            integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
+    </head>
+
+    <body>
+        <div id="loader"></div>
+        <div id="loaderSide"></div>
+        <!-- <h1>Metrics:</h1> -->
+        <div id="metrices"></div>
+        <div id="crossContainer"></div>
+        <!-- <div id="loaderTrain"></div> -->
+
+        <div id="ui-menu" hidden>
+            <button class="session-terminal button_white" id="retrain">RETRAIN</button> <!--  -->
+            <!-- <button class="session-terminal button_white" id="download_pred">DOWNLOAD PRED</button>  -->
+            <!-- <button class="session-terminal button_white" id="checkpoint">CHECKPOINT</button> -->
+            <button class="session-terminal button_red" id="download">DOWNLOAD</button> <!--  -->
+            <!-- <button class="session-terminal button_blue" id="download">DOWNLOAD ANNOTATION</button>  -->
+            <button class="session-terminal button_red" id="end">FINISH</button>
+            <!-- <button class="session-terminal button_red" id="start">START</button> -->
+        </div>
+
+        <div id="uploadForm">
+            <h3 id="upload-message"></h3>
+            <img src="./img/giphy.gif" />
+            <h2>Thank you for finishing the study</h2>
+            <form enctype="multipart/form-data" method="post" name="fileinfo">
+                <p style="font-style: italic">
+                    <!-- If you clicked finish button accidently, go back by pressing
+                    <b>cancel</b> button and continue your study, otherwise \ -->
+                    Remember to upload zip file downloaded when you clicked <b>Finish</b> button to
+                    Canvas!
+                </p>
+                <!--
+                <hr />
+                <p style="color: red">
+                    Note: Please Upload to Canvas the latest downloaded files only ( if you cancel or have
+                    cancelled)
+                </p>
+                <p id="uploadState" style="color: red"></p>
+                <p>
+                <div style="display:inline-block; margin-top: 50px; font-style: italic;">
+                <label class="custom-upload-button" id="submit">
+                    submit
+                    <input type="submit" value="Upload !" />
+                </label>
+                
+            </div>
+            </p> 
+                <button id="cancel" class="button_red">Cancel</button> -->
+            </form>
+        </div>
+
+        <div id="modal-wrapper">
+            <div class="modal-header">
+                <!-- <h2>Instructions and Guide:</h2> -->
+                <a href="#modal-wrapper" class="btn-close" aria-hidden="true">×</a>
+            </div>
+            <div class="modal-body">
+                <label for="studentId">Student Id:</label>
+                <input
+                    type="text"
+                    id="studentId"
+                    name="studentId"
+                    placeholder="Enter your student id"
+                />
+                <label for="testRegion">Test Region ID:</label>
+                <input
+                    type="text"
+                    id="testRegion"
+                    name="testRegion"
+                    placeholder="Enter test region id"
+                />
+                <small></small>
+                <hr />
+                <div class="top-group">
+                    <div style="text-align: left">
+                        <span>
+                            <i class="fa-solid fa-computer-mouse mouse-icon"></i>
+                            <b> Mouse: </b>
+                        </span>
+                        <span class="mouse-instruction">Right click: Panning</span>
+                        <b><i class="fa-solid fa-mountain-sun"></i></b>
+                        <span class="mouse-instruction">Left click: Rotation</span>
+                        <span class="mouse-instruction">Double click: Focus to point</span>
+                    </div>
+
+                    <div class="dat-instruction" style="text-align: left">
+                        <div class="btn-group btn-group-toggle">
+                            <button class="ci btn active">FLOOD</button>
+                            <button class="ci btn">DRY</button>
+                            <p style="margin-left: 5px">
+                                Select between two in UI to annotate as flood or dry before/while
+                                doing annotation
+                            </p>
+                        </div>
+                    </div>
+                    <div class="dat-instruction" style="text-align: left">
+                        <div class="btn-group btn-group-toggle">
+                            <button class="ci btn active">FILL</button>
+                            <button class="ci btn">ERASE</button>
+                            <p style="margin-left: 5px">
+                                Select between two in UI to either annotate areas or clear previous
+                                annotation with brush options
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <ul style="text-align: left">
+                    <div id="menuBFS">
+                        <li>
+                            Press <b>f</b> to annotate current point and connected down/up-stream
+                            pixels
+                        </li>
+                        <li>Press <b>p</b> to select points for polygon selection</li>
+                        <li>
+                            Press <b>o</b> to annotate selected polygon and connected down/up-stream
+                            pixels
+                        </li>
+                    </div>
+                    <!-- <div id="menuSegmentation">
+                        <li>Press <b>g</b> to highlight the segmentation under current point</li>
+                        <li>
+                            Press <b>s</b> to annotate the connected segmentation under current
+                            point
+                        </li>
+                    </div> -->
+                    <li>Press <b>t</b> to use the brush tool</li>
+                    <li>Press <b>z</b> to undo the most recent annotation</li>
+                    <li>Press <b>r</b> to redo the most recent undo or erase</li>
+                    <li>Press <b>m</b> to bring this menu back</li>
+                    <!-- <li>
+                        Press <b>d</b> to annotate the connected segmentation under current point
+                    </li> -->
+                </ul>
+                <label class="button_white">
+                    Elevation File
+                    <input id="stl" type = "file" name = "file" />
+                </label>
+                <label class="button_white">
+                    RGB File
+                    <input id="texture" type = "file" name = "file" />
+                </label>
+
+                <!-- <label class="button_white">
+                    TIFF for Data
+                    <input id="data" type = "file" name = "file" />
+                </label>  
+                <input type="checkbox" id="topology">
+                <label for="topology"> Compute topological simplifications</label>
+                <br/>
+                <br/>
+                <label class="button_white">
+                    Load Annotation From Checkpoint or Image
+                    <input type="file" id="upload" />
+                </label> -->
+
+                <button id="submit" class="button_red">Submit!</button>
+                <button id="exploration" class="button_red">Start!</button>
+                <!-- <button id="train" class="button_red">Train!</button> -->
+            </div>
+        </div>
+
+        <div class="inscene-ui" >
+            <ul>
+                <li id="BFS"><b>f</b> Point BFS</li>
+                <li id="polygonSelection"><b>p</b> Select Polygon</li>
+                <li id="polygonSelection2"><b>o</b> Fill Polygon</li>
+                <!-- <li id="segEnabled"><b>g</b> Highlight Segmentation</li> -->
+                <!-- <li id="segEnabled2"><b>s</b> Fill Segmentation</li> -->
+                <li><b>t</b> Brush</li>
+                <li><b>z</b> Undo</li>
+                <li><b>r</b> Redo</li>
+
+                <!-- <li>Press <b>s</b> to annotate the full segmentation under current point</li> -->
+                <li><b>m</b> Menu</li>
+                <!-- <li>Press <b>g</b> to highlight the full segmentation under current point</li> -->
+                <!-- <li>Press <b>d</b> to annotate the connected segmentation under current point</li> -->
+            </ul>
+        </div>
+        <script type="module" src="bundle.js"></script>
+
+        <!-- <script> 
+            // const form = document.forms.namedItem('fileinfo')
+            // const formWrapper = document.getElementById('uploadForm')
+            // form.addEventListener('submit', async (event) => {
+            //     event.preventDefault()
+            //     let formData = new FormData(form)
+            //     let files = document.getElementById('fileInput').files
+            //     if (files.length == 0) {
+            //         document.getElementById('uploadState').innerHTML =
+            //             'Please select JSON file before uploading'
+            //         console.log('select file')
+            //         return
+            //     }
+            //     file1 = files[0]
+            //     for (const [key, value] of formData.entries()) {
+            //         console.log(key, value)
+            //     }
+            //     let response = await fetch('http://127.0.0.1:5000/stateUpload', {
+            //         method: 'POST',
+            //         body: formData,
+            //     })
+            //     if (!response.ok) {
+            //         form.style.display = 'block'
+            //         document.getElementById('upload-message').innerHTML =
+            //             'Upload was not successfull, please try again'
+            //     }
+
+            //     _response = await response.json()
+            //     form.style.display = 'none'
+            //     document.getElementById('upload-message').innerHTML =
+            //         'Thank you for taking part in this study, Your data has been saved, You can close this tab in browser'
+            // })
+        </script> -->
+    </body>
+</html>

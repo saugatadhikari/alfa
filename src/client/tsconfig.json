@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "paths": {
+            "@tweenjs/tween.js": ["../../typings/tween.js"]
+        }
+    },
+    "include": ["**/*.ts"]
+}

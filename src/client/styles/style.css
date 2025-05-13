@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Spice&family=Roboto:wght@300;400;500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Spice&family=Roboto:wght@300;400;500&display=swap');
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+}
+
+p,
+h5,
+h6,
+span,
+button,
+div {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.button_red {
+    padding: 15px 10px;
+    width: 120px;
+    position: absolute;
+    background-color: #fa6400;
+    color: white;
+    border: none;
+    font-size: 13px;
+    /* font-size: 16px; */
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;
+    /* margin: 0 10px; */
+
+    /* position: absolute;*/
+}
+
+.button_white {
+    padding: 15px 10px;
+    width: 120px;
+    background-color: whitesmoke;
+    color: gray;
+    border: none;
+    font-size: 13px;
+    /* font-size: 16px; */
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+#ui-menu {
+    display: none;
+    position: absolute;
+    top: 93%;
+    left: 83%;
+}
+
+.modal:target:before {
+    display: none;
+}
+
+/* #end {
+    display: none;
+} */
+
+#modal-wrapper {
+    position: absolute;
+    display: none;
+    overflow: auto;
+    /* top: 15%;
+    left: 35%; */
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(1, 1, 1, 0.5);
+    color: white;
+    z-index: 99999;
+    /* overflow-y: auto; */
+    /* height: 100%;
+    width: 100%; */
+}
+
+#modal-wrapper button {
+    /* right: 10px; */
+    position: relative;
+}
+
+.modal-header {
+    padding-top: 20px;
+    text-align: center;
+}
+
+#modal-wrapper ul {
+    list-style-type: none;
+    text-align: left;
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; */
+}
+
+#modal-wrapper ul li {
+    padding: 35px 0 0 0;
+    /* min-width: 400px; */
+}
+.modal-body {
+    padding: 20px;
+    margin: 0% 15%;
+    background: #bedeff;
+    text-align: center;
+    box-shadow: 12px 12px 10px #c7b4b4;
+    color: BLACK;
+}
+
+input[type='text'] {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+#loader {
+    border-top: 16px solid rgb(243, 158, 0);
+    border-right: 16px solid green;
+    border-bottom: 16px solid rgb(55, 53, 180);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loaderSide {
+    border-top: 16px solid rgb(243, 158, 0);
+    border-right: 16px solid green;
+    border-bottom: 16px solid rgb(55, 53, 180);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    /* top: 38%;
+    left: 3.5%; */
+
+    top: 20%;
+    left: 3.5%;
+    /* bottom: 50%;
+    right: 50%; */
+    /* h3{
+        position: fixed;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 36px;
+        color: #FFFFFF;
+        top: 55%;
+      } */
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+} */
+
+#metrices {
+    position: absolute;
+    display: none;
+    overflow: auto;
+    top: 20%;
+    left: 0.5%;
+    bottom: 50%;
+    right: 50%;
+    width: 12%;
+    height: 23%;
+    text-align: center;
+    background: rgba(1, 1, 1, 0.5);
+    color: white;
+    z-index: 0;
+
+    /* max-width: 80%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif; */
+}
+
+#crossContainer {
+    position: absolute;
+    display: none;
+    overflow: auto;
+    top: 38%;
+    left: 2%;
+    bottom: 50%;
+    right: 50%;
+    width: 12%;
+    height: 18%;
+    text-align: center;
+    background: rgba(1, 1, 1, 0.5);
+    color: red;
+    z-index: 1;
+    font-size: 40px;
+}
+
+/* #loaderTrain {
+    position: absolute;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 36px;
+    color: #FFFFFF;
+    top: 25%;
+    left: 5%;
+} */
+
+
+/* #loaderSide{
+    #logo-spinner {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+      #loader-component{
+        border-top: 16px solid rgb(243, 158, 0);
+        border-right: 16px solid green;
+        border-bottom: 16px solid rgb(55, 53, 180);
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+    }
+    h3{
+      position: fixed;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 36px;
+      color: #FFFFFF;
+      top: 55%;
+    }
+    span{
+      font-size: 15px;
+      line-height: 24px;
+      color: #FFFFFF;
+    }
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  } */
+  
+
+#uploadForm {
+    /* display: none; */
+    height: 100vh;
+    text-align: center;
+}
+input[type='file'],
+input[type='submit'] {
+    display: none;
+}
+
+#submit {
+    background-color: #fa6400;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    width: 120px;
+    /* font-size: 16px; */
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.custom-upload-button {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#uploadForm {
+    display: none;
+}
+
+#upload-message {
+    color: cadetblue;
+}
+
+/* dry/wet toggle button css */
+
+.btn {
+    background-color: #4d4f51;
+    border: navajowhite;
+    color: rgb(182, 182, 182);
+    cursor: pointer;
+}
+.btn-group-toggle {
+    border-radius: 8px;
+    /* border: 1px solid #212529; */
+}
+.btn-group-toggle .btn {
+    /* margin: 3px 8px 3px 3px;
+    border-radius: 8px !important; */
+    position: relative !important;
+    width: auto !important;
+    font-size: inherit !important;
+    padding: 10px;
+}
+.btn-group-toggle .btn.active {
+    background-color: #ffff;
+    color: black;
+    font-weight: bold;
+    transition: background-color 1000ms ease-in-out;
+}
+.btn-group-toggle .btn:last-of-type {
+    margin-right: 3px !important;
+}
+
+.customList {
+    border-left: 2px solid wheat;
+    height: 37px !important;
+}
+
+.outList {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    border: none;
+}
+
+.outList2 {
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    border: none;
+}
+
+ul li b {
+    box-shadow: 2px 2px 5px #524e4e;
+    padding: 15px;
+    margin: 0 10px;
+    background: #3d3c3c;
+    color: white;
+    border-radius: 15px;
+    text-transform: uppercase;
+}
+
+.cr {
+    background: #1a1a1a7a !important;
+}
+
+.mouse-icon {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.dat-instruction .btn-group-toggle {
+    display: flex;
+    flex-direction: row;
+}
+
+.top-group {
+    padding-left: 40px;
+}
+
+.top-group div {
+    padding-top: 10px;
+}
+
+.top-group div span {
+    margin: 10px;
+}
+
+.close-button {
+    font-size: 14px;
+}
+
+.inscene-ui {
+    position: absolute;
+    bottom: 20px;
+    left: 0px;
+    color: wheat;
+    user-select: none;
+}
+
+.inscene-ui ul {
+    list-style-type: none;
+}
+
+.inscene-ui ul li {
+    /* padding: 5px 17px 5px 0px; */
+    font-family: 'Bungee', cursive;
+}
+
+.inscene-ui b {
+    background: transparent;
+    box-shadow: none;
+}
+
+.inscene-ui .title {
+    margin: 0px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffa204;
+}
+
+.inscene-ui .title {
+    margin: 0px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffa204;
+}
+
+#file {
+    position: absolute;
+    top: 100px;
+    display: block;
+}
+
+
+  
