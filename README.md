@@ -1,4 +1,4 @@
-# ALFA: Active Learning for Flood Annotation code for our IJCAI 2025 paper "Faster Annotation for Elevation-Guided Flood Extent Mapping by Consistency-Enhanced Active Learning"  
+# Code for our IJCAI 2025 paper "Faster Annotation for Elevation-Guided Flood Extent Mapping by Consistency-Enhanced Active Learning"  
 
 # Instructions for installing heightmap meshing utility
 Dependencies: 
