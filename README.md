@@ -45,4 +45,6 @@ Installation:
 4. Enter your name on Student Id box and test_region_id on Test Region ID box.
 5. Upload elevation data and rgb data and hit submit. You can find these files on ./alfa/backend_code/data_al/files_to_upload
 6. Perform the experiments once you get the response from backend
-7. The corresponding results with metrics will be stored inside /alfa/backend_code/user/<user_id>/output/Region_0_Metrics_C*.txt/ where the accuracy metrics for each cycle of Active Learning are stored. The metrics stored till line 12 on these files are our evaluation metrics.
+
+   # Demo Video: https://youtu.be/jKJYLDIADaw 
+8. The corresponding results with metrics will be stored inside /alfa/backend_code/user/<user_id>/output/Region_0_Metrics_C*.txt/ where the accuracy metrics for each cycle of Active Learning are stored. The metrics stored till line 12 on these files are our evaluation metrics.
