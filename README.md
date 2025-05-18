@@ -1,4 +1,4 @@
-# ALFA: Active Learning for Flood Annotation
+# Faster Annotation for Elevation-Guided Flood Extent Mapping by Consistency-Enhanced Active Learning      
 
 # Instructions for installing heightmap meshing utility
 Dependencies: 
