@@ -29,8 +29,20 @@ class ElevationDatasetAL(torch.utils.data.Dataset):
         self.data_path = data_path
         self.transforms = transforms
         
-        self.feature_files = os.listdir(data_path)
-        self.feature_files = [file for file in self.feature_files if file.endswith(".npy") and re.match(".*features.*", file) ]
+        feature_files = os.listdir(data_path)
+        # self.feature_files = [file for file in self.feature_files if file.endswith(".npy") and re.match(".*features.*", file) ]
+
+        self.feature_files = []
+        for feature_file in feature_files:
+            if feature_file.endswith(".npy") and re.match(".*features.*", feature_file):
+                label_file = re.sub("features", "label", feature_file)
+                label_data = np.load(os.path.join(self.data_path, label_file)).astype('int')
+                label_sum = np.sum(label_data)
+                # print("label_sum: ", label_sum)
+                if label_sum == 0:
+                    continue
+
+                self.feature_files.append(feature_file)
         
         self.data_len = len(self.feature_files)
 #         print(self.data_len)
